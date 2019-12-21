@@ -24,7 +24,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : paths.dotenv.DEPLOY_REPO,
       path : paths.dotenv.DEPLOY_PATH,
-      'post-deploy' : 'n lts && npm run build && pm2 reload ecosystem.config.js --env production'
+      'post-deploy' : 'n lts && yarn build && pm2 reload ecosystem.config.js --env production'
     }
   }
 };

@@ -26,18 +26,21 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   text-align: center;
   min-height: 100vh;
   min-width: 100vw;
-  overflow: hidden;
 }
 
 .App-header {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  vertical-align: middle;
   font-size: calc(10px + 2vmin);
   color: white;
   text-align: center;
+
+  .cardContainer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .layer-1, .layer-2, .layer-3 {
@@ -52,6 +55,7 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   position: absolute;
   min-height: 40vh;
   min-width: 40vw;
+  z-index: 2;
 
   img {
     position: absolute;
@@ -79,6 +83,11 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   width: auto;
 }
 
+.xlarge {
+  height: 60vh;
+  width: auto;
+}
+
 .groupTopLeft {
   position: absolute;
   top: 0;
@@ -96,6 +105,7 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   img {
     top: 0;
     right: 0;
+    filter: drop-shadow(-8px 36px 7px rgba(107, 107, 107, 0.5))
   }
 }
 .groupBottomLeft {
@@ -115,18 +125,6 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
     bottom: 0;
     right: 0;
   }
-}
-
-.layer-1 {
-
-}
-
-.layer-2 {
-
-}
-
-.layer-3 {
-
 }
 
 .christmas-wishes {
@@ -150,10 +148,22 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 
 .card {
   position: absolute;
-  max-width: auto;
-  height: 80vh;
-  margin-left: -80px;
+  min-width: 60vw;
+  max-width: 110vw;
+  margin-left: -20px;
+  
   filter: drop-shadow(5px 5px 3px rgba(107, 107, 107, 0.5));
+  @media (min-width: 800px) {
+    max-width: 100vw;
+    height: auto;
+    margin-left: -45px;
+  }
+  @media (min-width: 1200px) {
+    width: auto;
+    max-width: 60vw;
+    min-height: 70vh;
+    margin-left: -80px;
+  }
 }
 
 .fade-in {
@@ -164,4 +174,139 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 .loaded {
   // transition: opacity 2000ms ease-in;
   opacity: 1;
+}
+
+.animate {
+  transition: opacity 5ms, top 2s, left 3s, right 2s, bottom 3s, transform 4s;
+}
+
+.prepareAnimation {
+  transform: translateX(-500px) translateY(-500px) rotate(-40deg);
+}
+
+.animationComplete {
+  opacity: 1;
+}
+
+.animate-topRight {
+  animation: rightTopIn 2s 3s;
+}
+.animate-bottomRight {
+  animation: rightBottomIn 2s 3s;
+}
+.animate-right {
+  animation: rightIn 2s 3s;
+}
+.animate-topLeft {
+  animation: leftTopIn 2s 3s;
+}
+.animate-bottomLeft {
+  animation: leftBottomIn 2s 3s;
+}
+.animate-left {
+  animation: leftIn 2s 3s;
+}
+.animate-top {
+  animation: topIn 2s 3s;
+}
+.animate-bottom {
+  animation: bottomIn 2s 3s;
+}
+
+$topIn: translateY(-500px);
+$bottomIn: translateY(500px);
+$leftIn: translateX(-500px);
+$rightIn: translateX(500px);
+$rightTopIn: translateX(500px) translateY(-500px);
+$leftTopIn: translateX(-500px) translateY(-500px);
+$rightBottomIn: translateX(500px) translateY(500px);
+$leftBottomIn: translateX(-500px) translateY(500px);
+$normal: translateX(0) translateY(0);
+
+@keyframes leftIn {
+  from {
+    transform: $leftIn;
+    opacity: 0;
+  }
+  to {
+    transform: $normal;
+    opacity: 1;
+  }
+}
+
+@keyframes rightIn {
+  from {
+    transform: $rightIn;
+    opacity: 0;
+  }
+  to {
+    transform: $normal;
+    opacity: 1;
+  }
+}
+
+@keyframes topIn {
+  from {
+    transform: $topIn;
+    opacity: 0;
+  }
+  to {
+    transform: $normal;
+    opacity: 1;
+  }
+}
+
+@keyframes bottomIn {
+  from {
+    transform: $bottomIn;
+    opacity: 0;
+  }
+  to {
+    transform: $normal;
+    opacity: 1;
+  }
+}
+
+@keyframes rightTopIn {
+  from {
+    transform: $rightTopIn;
+    opacity: 0;
+  }
+  to {
+    transform: $normal;
+    opacity: 1;
+  }
+}
+
+@keyframes leftTopIn {
+  from {
+    transform: $leftTopIn;
+    opacity: 0;
+  }
+  to {
+    transform: $normal;
+    opacity: 1;
+  }
+}
+
+@keyframes rightBottomIn {
+  from {
+    transform: $rightBottomIn;
+    opacity: 0;
+  }
+  to {
+    transform: $normal;
+    opacity: 1;
+  }
+}
+
+@keyframes leftBottomIn {
+  from {
+    transform: $leftBottomIn;
+    opacity: 0;
+  }
+  to {
+    transform: $normal;
+    opacity: 1;
+  }
 }

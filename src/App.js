@@ -138,40 +138,54 @@ export default class App extends Component {
       transform: "rotate(" + ((Math.random() * 60) - 30) + "deg)"
     }
 
+    let gift2Style = { 
+      bottom: -150,
+      right: -50,
+      transform: "rotate(" + ((Math.random() * 90) - 45) + "deg)" 
+    }
+
+    let cardStyle = {
+      left: '50%',
+      top: '50%',
+      transform: 'translateX(-48%) translateY(-50%)'
+    }
+
     return (
       <div>
-        <div className={"App random-background-" + Math.round(Math.random() * 4 + 1)}>
+        <div className={"App random-background-" + Math.floor(Math.random() * 4 + 1)}>
 
           <div className="layer-2">
-            <header className="App-header">
-              <Image src={card2} className="card" alt="" flyIn="topLeft" onComplete={this.onCardComplete}></Image>
-              <p ref={p => this.textElementTop = p} style={textStyle}>
-                <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span>
-              </p>
-              <p ref={p => this.textElementMiddel = p} style={textStyle}>
-                <span className={this.state.theme + "-wishes"}>{this.state.wishes}</span><br></br><br></br>
-              </p>
-              <p ref={p => this.textElementBottom = p} style={textStyle}>
-                <span className={this.state.theme + "-names"}>{this.state.end}</span> 
-              </p>
-            </header>
+            <div className="App-header">
+              <div className="cardContainer">
+                <Image src={card2} className="card" alt="" flyIn="top" style={cardStyle} onComplete={this.onCardComplete}></Image>
+                <p ref={p => this.textElementTop = p} style={textStyle}>
+                  <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span>
+                </p>
+                <p ref={p => this.textElementMiddel = p} style={textStyle}>
+                  <span className={this.state.theme + "-wishes"}>{this.state.wishes}</span><br></br><br></br>
+                </p>
+                <p ref={p => this.textElementBottom = p} style={textStyle}>
+                  <span className={this.state.theme + "-names"}>{this.state.end}</span> 
+                </p>
+              </div>
+            </div>
           </div>
           <div className="layer-1">
             <div className="groupTopLeft">
 
             </div>
             <div className="groupTopRight">
-              <Image src={twigPine} className="large" alt="" style={twigPineStyle} flyIn="topLeft"></Image>
-              <Image src={twigThuja} className="large" alt="" style={twigThujaStyle} flyIn="topLeft"></Image>
-              <Image src={silverPearl} className="small" alt="" style={silverPearlStyle} flyIn="topLeft"></Image>
-              <Image src={silverGlitter} className="small" alt="" style={silverGlitterStyle} flyIn="topLeft"></Image>
+              <Image src={twigPine} className="large" alt="" style={twigPineStyle} flyIn="topRight"></Image>
+              <Image src={twigThuja} className="large" alt="" style={twigThujaStyle} flyIn="right"></Image>
+              <Image src={silverPearl} className="small" alt="" style={silverPearlStyle} flyIn="topRight"></Image>
+              <Image src={silverGlitter} className="small" alt="" style={silverGlitterStyle} flyIn="right"></Image>
             </div>
             <div className="groupBottomLeft">
-              <Image src={decoration2} className="large" alt="" style={decoration2Style} flyIn="topLeft"></Image>
-              <Image src={cones2} className="small" alt="" style={cones2Style} flyIn="topLeft"></Image>
+              <Image src={decoration2} className="large" alt="" style={decoration2Style} flyIn="bottomLeft"></Image>
+              <Image src={cones2} className="small" alt="" style={cones2Style} flyIn="bottomLeft"></Image>
             </div>
             <div className="groupBottomRight">
-              <Image src={gift2} className="large" alt="" style={{ transform: "rotate(" + ((Math.random() * 90) - 45) + "deg)" }} flyIn="topLeft"></Image>
+              <Image src={gift2} className="xlarge" alt="" style={gift2Style} flyIn="bottomRight"></Image>
             </div>
           </div>
 

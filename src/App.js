@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
+import Image from './component/Image' 
 import anise from './img/xmas_assets/hejho_mockup_anise.png';
 import silverPearl from './img/xmas_assets/hejho_mockup_bauble-silver_pearl.png';
 import silverGlitter from './img/xmas_assets/hejho_mockup_bauble-silver-glitter.png';
@@ -33,6 +34,8 @@ import twig2 from './img/xmas_assets/hejho_mockup_twig2.png';
 import red from './img/xmas_assets/hejho_mockup_twine-red.png';
 import twine from './img/xmas_assets/hejho_mockup_twine.png';
 
+import {gsap} from 'gsap';
+
 export default class App extends Component {
 
   constructor(props) {
@@ -41,21 +44,19 @@ export default class App extends Component {
     this.imagesToLoad = 0;
     this.imagesLoaded = 0;
     this.state = {
-      start: "Beste",
+      start: "Lieve",
       name: "Test & test",
       wishes: "Fijne Kerstdagen",
+      end: "Roy & Priscilla",
       theme: "christmas",
       loading: true
     }
-  }
 
-  imageLoaded() {
-    this.imagesLoaded++;
-    if (this.imagesToLoad === this.imagesLoaded) {
-      this.setState({
-        loading: false
-      });
-    }
+    this.onCardComplete = this.onCardComplete.bind(this);
+    
+    this.textElementTop = null;
+    this.textElementMiddel = null;
+    this.textElementBottom = null;
   }
 
   createImage(classString, src, alt, style) {
@@ -70,6 +71,22 @@ export default class App extends Component {
 
   componentDidMount() {
     this.parseNames();
+
+  }
+
+  onCardComplete() {
+    let from = {
+      opacity: 0,
+      y: 100
+    };
+    let to = {
+      opacity: 1,
+      y: 0
+    }
+    let tl = gsap.timeline({ defaults: { duration: 2, ease: "expo"}});
+    tl.fromTo(this.textElementTop, from, to);
+    tl.fromTo(this.textElementMiddel, from, to, "-=0.5");
+    tl.fromTo(this.textElementBottom, from, to, "-=0.5");
   }
 
   parseNames() {
@@ -115,54 +132,46 @@ export default class App extends Component {
       transform: "rotate(" + ((Math.random() * 10) - 15) + "deg)"
     }
     
+    let textStyle = {
+      zIndex: 1,
+      opacity: 0,
+      transform: "rotate(" + ((Math.random() * 60) - 30) + "deg)"
+    }
+
     return (
       <div>
         <div className={"App random-background-" + Math.round(Math.random() * 4 + 1)}>
 
           <div className="layer-2">
             <header className="App-header">
-              {this.createImage("card", card2, "", {})}
-              {/* <img className="card" src={card2}></img> */}
-              <p style={{zIndex: 1,transform: "rotate(" + ((Math.random() * 60) - 30) + "deg)"}}>
-                <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span><br></br>
+              <Image src={card2} className="card" alt="" flyIn="topLeft" onComplete={this.onCardComplete}></Image>
+              <p ref={p => this.textElementTop = p} style={textStyle}>
+                <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span>
+              </p>
+              <p ref={p => this.textElementMiddel = p} style={textStyle}>
                 <span className={this.state.theme + "-wishes"}>{this.state.wishes}</span><br></br><br></br>
-                <span className={this.state.theme + "-names"}>{this.state.end} Roy & Pris</span> 
-
+              </p>
+              <p ref={p => this.textElementBottom = p} style={textStyle}>
+                <span className={this.state.theme + "-names"}>{this.state.end}</span> 
               </p>
             </header>
           </div>
-          {/* <div className="layer-3">
-
-        </div> */}
           <div className="layer-1">
             <div className="groupTopLeft">
 
             </div>
             <div className="groupTopRight">
-              {this.createImage("large", twigPine, "", twigPineStyle)}
-              {this.createImage("large", twigThuja, "", twigThujaStyle)}
-              {this.createImage("small", silverPearl, "", silverPearlStyle)}
-              {this.createImage("small", silverGlitter, "", silverGlitterStyle)}
-              {/* <img className="large" src={twigPine} alt="twig1" style={twigPineStyle} onLoad={this.imageLoaded}></img> */}
-              {/* <img className="large" src={twigThuja} alt="twig2" style={twigThujaStyle} onLoad={this.imageLoaded}></img>
-            <img className="small" src={silverPearl} alt="twig2" style={silverPearlStyle} onLoad={this.imageLoaded}></img>
-          <img className="small" src={silverGlitter} alt="twig2" style={silverGlitterStyle} onLoad={this.imageLoaded}></img> */}
-
+              <Image src={twigPine} className="large" alt="" style={twigPineStyle} flyIn="topLeft"></Image>
+              <Image src={twigThuja} className="large" alt="" style={twigThujaStyle} flyIn="topLeft"></Image>
+              <Image src={silverPearl} className="small" alt="" style={silverPearlStyle} flyIn="topLeft"></Image>
+              <Image src={silverGlitter} className="small" alt="" style={silverGlitterStyle} flyIn="topLeft"></Image>
             </div>
             <div className="groupBottomLeft">
-              {this.createImage("large", decoration2, "", decoration2Style)}
-              {this.createImage("small", cones2, "", cones2Style)}
-              {/* <img className="large" src={decoration2} alt="twig1" style={decoration2Style} onLoad={this.imageLoaded}></img>
-            <img className="small" src={cones2} alt="twig1" style={cones2Style} onLoad={this.imageLoaded}></img> */}
-
+              <Image src={decoration2} className="large" alt="" style={decoration2Style} flyIn="topLeft"></Image>
+              <Image src={cones2} className="small" alt="" style={cones2Style} flyIn="topLeft"></Image>
             </div>
             <div className="groupBottomRight">
-
-              {this.createImage("large", gift2, "", { transform: "rotate(" + ((Math.random() * 90) - 45) + "deg)" })}
-              {/* <img className="large" src={gift2} alt="anise" style={{
-                transform: "rotate(" + ((Math.random() * 90) - 45) + "deg)"
-              }} onLoad={this.imageLoaded}></img> */}
-
+              <Image src={gift2} className="large" alt="" style={{ transform: "rotate(" + ((Math.random() * 90) - 45) + "deg)" }} flyIn="topLeft"></Image>
             </div>
           </div>
 

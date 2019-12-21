@@ -55,6 +55,7 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 
   img {
     position: absolute;
+    filter: drop-shadow(5px 5px 3px rgba(107, 107, 107, 0.5));
   }
 }
 
@@ -157,7 +158,7 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 
 .fade-in {
   opacity: 0;
-  transition: opacity 2ms ease-in;
+  transition: opacity 2ms ease-in 5s;
 }
 
 .loaded {

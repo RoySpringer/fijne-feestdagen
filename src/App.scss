@@ -1,0 +1,162 @@
+$color-primary: #282c34;
+$color-secondary: #282c34;
+
+$webgradient-1: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+$webgradient-2: linear-gradient(to top, #dfe9f3 0%, white 100%);
+$webgradient-3: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+
+.random-background-1 {
+  background-image: $webgradient-1;
+}
+
+.random-background-2 {
+  background-image: $webgradient-2;
+}
+
+.random-background-3 {
+  background-image: $webgradient-3;
+}
+
+
+.App {
+  text-align: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow: hidden;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  text-align: center;
+}
+
+.layer-1, .layer-2, .layer-3 {
+  position: absolute;
+  top:0;
+  left:0;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.groupTopLeft, .groupTopRight, .groupBottomLeft, .groupBottomRight {
+  position: absolute;
+  min-height: 40vh;
+  min-width: 40vw;
+
+  img {
+    position: absolute;
+  }
+}
+
+.xsmall {
+  height: 10vh;
+  width: auto;
+}
+
+.small {
+  height: 20vh;
+  width: auto;
+}
+
+.medium {
+  height: 30vh;
+  width: auto;
+}
+
+.large {
+  height: 40vh;
+  width: auto;
+}
+
+.groupTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  img {
+    top: 0;
+    left: 0;
+  }
+}
+.groupTopRight {
+  position: absolute;
+  text-align: right;
+  top: 0;
+  right: 0;
+  img {
+    top: 0;
+    right: 0;
+  }
+}
+.groupBottomLeft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  img {
+    bottom: 0;
+    left: 0;
+  }
+}
+.groupBottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  img {
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.layer-1 {
+
+}
+
+.layer-2 {
+
+}
+
+.layer-3 {
+
+}
+
+.christmas-wishes {
+  // font-family: 'Raleway', sans-serif;
+  font-family: 'Lobster', cursive;
+  font-size: 4rem;
+  text-shadow: 1px 1px 5px #ccc;
+}
+
+.christmas-between {
+  font-family: 'Lobster', cursive;
+  font-size: 3rem;
+  text-shadow: 1px 1px 5px #ccc;
+}
+
+.christmas-names {
+  color: #d21c13c5;
+  font-size: 3rem;
+  font-family: 'Indie Flower', cursive;
+}
+
+.card {
+  position: absolute;
+  max-width: auto;
+  height: 80vh;
+  margin-left: -80px;
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 2s 2000ms ease-in;
+  transition-delay: 2000ms;
+}
+
+.fade-in.loaded {
+  transition: opacity 2s 2000ms ease-in;
+  opacity: 1;
+}

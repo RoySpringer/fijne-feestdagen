@@ -50,9 +50,7 @@ export default class Image extends Component {
     onComplete() {
         if (this.props.onComplete) {
             this.props.onComplete();
-
-        }
-        
+        } 
     }
 
     imageLoaded() {

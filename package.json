@@ -1,6 +1,6 @@
 {
   "name": "fijne-feestdagen",
-  "homepage": "http://fijne-feestdagen.royspringer.nl/",
+  "homepage": "http://fijne-feestdagen.royspringer.nl/", 
   "version": "0.1.0",
   "private": true,
   "dependencies": {

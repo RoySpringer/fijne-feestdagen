@@ -24,7 +24,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:RoySpringer/fijne-feestdagen.git',
       path : '/home/roy/pm2/fijne-feestdagen',
-      'post-deploy' : 'n lts && yarn build && pm2 reload ecosystem.config.js --env production'
+      'post-deploy' : 'n lts && yarn install && yarn build && pm2 reload ecosystem.config.js --env production'
     }
   }
 };

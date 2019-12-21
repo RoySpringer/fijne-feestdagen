@@ -19,11 +19,11 @@ module.exports = {
 
   deploy : {
     production : {
-      user : paths.dotenv.DEPLOY_USER,
-      host : paths.dotenv.DEPLOY_HOST,
+      user : 'roy',
+      host : '142.93.128.57',
       ref  : 'origin/master',
-      repo : paths.dotenv.DEPLOY_REPO,
-      path : paths.dotenv.DEPLOY_PATH,
+      repo : 'git@github.com:RoySpringer/fijne-feestdagen.git',
+      path : '/home/roy/pm2/fijne-feestdagen',
       'post-deploy' : 'n lts && yarn build && pm2 reload ecosystem.config.js --env production'
     }
   }

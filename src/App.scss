@@ -2,8 +2,9 @@ $color-primary: #282c34;
 $color-secondary: #282c34;
 
 $webgradient-1: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
-$webgradient-2: linear-gradient(to top, #dfe9f3 0%, white 100%);
-$webgradient-3: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+$webgradient-2: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+$webgradient-3: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+$webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 
 .random-background-1 {
   background-image: $webgradient-1;
@@ -17,6 +18,9 @@ $webgradient-3: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   background-image: $webgradient-3;
 }
 
+.random-background-4 {
+  background-image: $webgradient-4;
+}
 
 .App {
   text-align: center;
@@ -128,13 +132,13 @@ $webgradient-3: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   // font-family: 'Raleway', sans-serif;
   font-family: 'Lobster', cursive;
   font-size: 4rem;
-  text-shadow: 1px 1px 5px #ccc;
+  text-shadow: 1px 1px 4px rgb(177, 177, 177);
 }
 
 .christmas-between {
   font-family: 'Lobster', cursive;
   font-size: 3rem;
-  text-shadow: 1px 1px 5px #ccc;
+  text-shadow: 1px 1px 4px rgb(177, 177, 177);
 }
 
 .christmas-names {
@@ -148,15 +152,15 @@ $webgradient-3: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   max-width: auto;
   height: 80vh;
   margin-left: -80px;
+  filter: drop-shadow(5px 5px 3px rgba(107, 107, 107, 0.5));
 }
 
 .fade-in {
   opacity: 0;
-  transition: opacity 2s 2000ms ease-in;
-  transition-delay: 2000ms;
+  transition: opacity 2ms ease-in;
 }
 
-.fade-in.loaded {
-  transition: opacity 2s 2000ms ease-in;
+.loaded {
+  // transition: opacity 2000ms ease-in;
   opacity: 1;
 }

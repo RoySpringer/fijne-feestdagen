@@ -59,9 +59,6 @@ export default class App extends Component {
   }
 
   createImage(classString, src, alt, style) {
-    console.log(this)
-    console.log(src)
-    console.log(this.sources.indexOf(src))
     if (this.sources.indexOf(src) == -1) {
       this.imagesToLoad++;
       this.sources.push(src);
@@ -69,10 +66,6 @@ export default class App extends Component {
     return (
       <img className={classString + " fade-in" + (this.state.loading === false ? " loaded":"")} src={src} alt={alt} style={style} onLoad={() => this.imageLoaded()}></img>
     )
-  }
-
-  parseLang() {
-
   }
 
   componentDidMount() {
@@ -121,19 +114,17 @@ export default class App extends Component {
       left: window.innerWidth / 3,
       transform: "rotate(" + ((Math.random() * 10) - 15) + "deg)"
     }
+    
     return (
       <div>
-        <div style={{ display: this.state.loading ? "block" : "none" }}>
-          <p>Loading</p>
-        </div>
-        <div style={{ display: this.state.loading ? "none" : "block" }} className={"App random-background-" + Math.round(Math.random() * 3)}>
+        <div className={"App random-background-" + Math.round(Math.random() * 4 + 1)}>
 
           <div className="layer-2">
             <header className="App-header">
               {this.createImage("card", card2, "", {})}
               {/* <img className="card" src={card2}></img> */}
               <p style={{zIndex: 1,transform: "rotate(" + ((Math.random() * 60) - 30) + "deg)"}}>
-                <span className={this.state.theme + "-between smallerTekst"}>{this.state.start + " " + this.state.name},</span><br></br>
+                <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span><br></br>
                 <span className={this.state.theme + "-wishes"}>{this.state.wishes}</span><br></br><br></br>
                 <span className={this.state.theme + "-names"}>{this.state.end} Roy & Pris</span> 
 

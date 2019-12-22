@@ -10,9 +10,12 @@ export default class Image extends Component {
         this.prepareAnimation = 'animate';
         this.animateClass = 'animate';
         this.onPageLoad = this.onPageLoad.bind(this);
-        this.onComplete = this.onComplete.bind(this);
+        this.onAnimationComplete = this.onAnimationComplete.bind(this);
         this.onLoad = this.onLoad.bind(this);
-        this.styleTo = this.props.style || {};
+        this.styleTo = {
+            ...this.props.style,
+            opacity: 1
+        };
         this.state = {
             loaded: false,
             className: this.props.className,
@@ -25,23 +28,27 @@ export default class Image extends Component {
     /**************************************/
     componentDidMount() {
         window.addEventListener('load', this.onPageLoad);
-        window.dispatchEvent(new Event('resize'));
     }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.loaded === false && this.state.loaded) {
+            this.element.addEventListener("transitionend", this.onAnimationComplete);
             let style = this.styleTo;
-            style.transform += ' translateX(0) translateY(0)';
+            if(style.transform.search('translateX') === -1) {
+                style.transform += ' translateX(0)';    
+            }
+            if(style.transform.search('translateY') === -1) {
+                style.transform += ' translateY(0)';
+            }
             this.setState({
                 style: style
             });
-            this.element.addEventListener("transitionend", this.onComplete, false);
         }
     }
 
     componentWillUnmount() {
         window.removeEventListener('load', this.onPageLoad);
-        this.element.removeEventListener("transitionend", this.onComplete);
+        this.element.removeEventListener("transitionend", this.onAnimationComplete, false);
     }
 
     /**************************************/
@@ -54,8 +61,8 @@ export default class Image extends Component {
         })
     }
 
-    onComplete() {
-        this.element.removeEventListener("transitionend", this.onComplete);
+    onAnimationComplete(event) {
+        this.element.removeEventListener("transitionend", this.onAnimationComplete);
         if (this.props.onComplete) {
             this.props.onComplete();
         } 
@@ -65,22 +72,29 @@ export default class Image extends Component {
         let animPropsFrom = {
             ...this.state.style,
         };
-        animPropsFrom.transform = 'rotate(40deg)';
+        let newDeg = Math.random() * 20 + 20;
+        if(animPropsFrom.transform) {
+            let regEx = /[+-]?([0-9]*[.])?[0-9]+(?=deg)/gi;
+            let currentDeg = animPropsFrom.transform.match(regEx);
+            if(currentDeg) {
+                newDeg = parseFloat(currentDeg) + newDeg;
+            }
+        }
+        animPropsFrom.transform = 'rotate(' + newDeg + 'deg)';
         let searchString = this.flyIn.toLowerCase();
         if (searchString.search('top') !== -1) {
-            animPropsFrom.transform += " translateY(-500)";
-            animPropsFrom.top -= 500;
+            animPropsFrom.transform += " translateY(-500px)";
         } else if (searchString.search('bottom') !== -1) {
-            animPropsFrom.transform += " translateY(500)";
-            animPropsFrom.top += 500;
+            animPropsFrom.transform += " translateY(500px)";
         }
         if (searchString.search('left') !== -1) {
-            animPropsFrom.left -= 500;
-            animPropsFrom.transform += " translateX(-500)";
+            animPropsFrom.transform += " translateX(-500px)";
         } else if (searchString.search('right') !== -1) {
-            animPropsFrom.transform += " translateX(500)";
-            animPropsFrom.right += 500;
+            animPropsFrom.transform += " translateX(500px)";
         }
+
+        console.log("Style from: " +
+        animPropsFrom)
 
         this.setState({
             style: animPropsFrom,

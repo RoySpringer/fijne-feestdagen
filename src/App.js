@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Image from './component/Image' 
-import anise from './img/xmas_assets/hejho_mockup_anise.png';
+// import anise from './img/xmas_assets/hejho_mockup_anise.png';
 import silverPearl from './img/xmas_assets/hejho_mockup_bauble-silver_pearl.png';
 import silverGlitter from './img/xmas_assets/hejho_mockup_bauble-silver-glitter.png';
-import vertical from './img/xmas_assets/hejho_mockup_bouble-vertical.png';
-import stars from './img/xmas_assets/hejho_mockup_bouble-with-stars.png';
-import candy from './img/xmas_assets/hejho_mockup_candy.png';
-import card1 from './img/xmas_assets/hejho_mockup_card1.png';
+// import vertical from './img/xmas_assets/hejho_mockup_bouble-vertical.png';
+// import stars from './img/xmas_assets/hejho_mockup_bouble-with-stars.png';
+// import candy from './img/xmas_assets/hejho_mockup_candy.png';
+// import card1 from './img/xmas_assets/hejho_mockup_card1.png';
 import card2 from './img/xmas_assets/hejho_mockup_card2.png';
-import circle from './img/xmas_assets/hejho_mockup_chain-circle.png';
-import clip from './img/xmas_assets/hejho_mockup_clip.png';
-import cloves from './img/xmas_assets/hejho_mockup_cloves.png';
-import cones1 from './img/xmas_assets/hejho_mockup_cones1.png';
+// import circle from './img/xmas_assets/hejho_mockup_chain-circle.png';
+// import clip from './img/xmas_assets/hejho_mockup_clip.png';
+// import cloves from './img/xmas_assets/hejho_mockup_cloves.png';
+// import cones1 from './img/xmas_assets/hejho_mockup_cones1.png';
 import cones2 from './img/xmas_assets/hejho_mockup_cones2.png';
-import heart from './img/xmas_assets/hejho_mockup_cookie-heart.png';
-import star from './img/xmas_assets/hejho_mockup_decoration-star.png';
-import star2 from './img/xmas_assets/hejho_mockup_decoration-star2.png';
-import decoration1 from './img/xmas_assets/hejho_mockup_decoration1.png';
+// import heart from './img/xmas_assets/hejho_mockup_cookie-heart.png';
+// import star from './img/xmas_assets/hejho_mockup_decoration-star.png';
+// import star2 from './img/xmas_assets/hejho_mockup_decoration-star2.png';
+// import decoration1 from './img/xmas_assets/hejho_mockup_decoration1.png';
 import decoration2 from './img/xmas_assets/hejho_mockup_decoration2.png';
-import gift1 from './img/xmas_assets/hejho_mockup_gift1.png';
+// import gift1 from './img/xmas_assets/hejho_mockup_gift1.png';
 import gift2 from './img/xmas_assets/hejho_mockup_gift2.png';
-import light from './img/xmas_assets/hejho_mockup_light.png';
-import nutcracer from './img/xmas_assets/hejho_mockup_nutcracer.png';
-import nuts1 from './img/xmas_assets/hejho_mockup_nuts1.png';
-import nuts2 from './img/xmas_assets/hejho_mockup_nuts2.png';
-import plate from './img/xmas_assets/hejho_mockup_plate.png';
-import stars2 from './img/xmas_assets/hejho_mockup_stars.png';
+// import light from './img/xmas_assets/hejho_mockup_light.png';
+// import nutcracer from './img/xmas_assets/hejho_mockup_nutcracer.png';
+// import nuts1 from './img/xmas_assets/hejho_mockup_nuts1.png';
+// import nuts2 from './img/xmas_assets/hejho_mockup_nuts2.png';
+// import plate from './img/xmas_assets/hejho_mockup_plate.png';
+// import stars2 from './img/xmas_assets/hejho_mockup_stars.png';
 import twigPine from './img/xmas_assets/hejho_mockup_twig-pine.png';
 import twigThuja from './img/xmas_assets/hejho_mockup_twig-thuja.png';
-import twig1 from './img/xmas_assets/hejho_mockup_twig1.png';
-import twig2 from './img/xmas_assets/hejho_mockup_twig2.png';
-import red from './img/xmas_assets/hejho_mockup_twine-red.png';
-import twine from './img/xmas_assets/hejho_mockup_twine.png';
+// import twig1 from './img/xmas_assets/hejho_mockup_twig1.png';
+// import twig2 from './img/xmas_assets/hejho_mockup_twig2.png';
+// import red from './img/xmas_assets/hejho_mockup_twine-red.png';
+// import twine from './img/xmas_assets/hejho_mockup_twine.png';
 
 import {gsap} from 'gsap';
 
@@ -59,21 +59,25 @@ export default class App extends Component {
     this.textElementBottom = null;
   }
 
-  createImage(classString, src, alt, style) {
-    if (this.sources.indexOf(src) == -1) {
-      this.imagesToLoad++;
-      this.sources.push(src);
-    }
-    return (
-      <img className={classString + " fade-in" + (this.state.loading === false ? " loaded":"")} src={src} alt={alt} style={style} onLoad={() => this.imageLoaded()}></img>
-    )
+  parseNames() {
+    let url = new URL(window.location.href);
+    let urlNames = url.pathname.substring(1, url.pathname.length);
+    let names = decodeURI(urlNames);
+    this.setState({
+      name: names
+    })
   }
-
+  
+  /**************************************/
+  /* Component lifecicle methods
+  /**************************************/
   componentDidMount() {
     this.parseNames();
-
   }
 
+  /**************************************/
+  /* Eventhandlers
+  /**************************************/
   onCardComplete() {
     console.log("Card animatin complete");
     let from = {
@@ -90,17 +94,9 @@ export default class App extends Component {
     tl.fromTo(this.textElementBottom, from, to, "-=0.5");
   }
 
-  parseNames() {
-    // Test%20%26%20Test
-    console.log(encodeURI("Test & test"))
-    let url = new URL(window.location.href);
-    let urlNames = url.pathname.substring(1, url.pathname.length);
-    let names = decodeURI(urlNames);
-    this.setState({
-      name: names
-    })
-  }
-
+  /**************************************/
+  /* Renderer
+  /**************************************/
   render() {
     let twigPineStyle = {
       top: -150,
@@ -153,12 +149,11 @@ export default class App extends Component {
 
     return (
       <div>
-        <div className={"App random-background-" + Math.floor(Math.random() * 4 + 1)}>
-
+        <div className="App">
           <div className="layer-2">
             <div className="App-header">
               <div className="cardContainer">
-                <Image src={card2} className="card" alt="" flyIn="top" style={cardStyle} onComplete={this.onCardComplete}></Image>
+                <Image image={card2} className="card" alt="" flyIn="top" style={cardStyle} onComplete={this.onCardComplete}></Image>
                 <p ref={p => this.textElementTop = p} style={textStyle}>
                   <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span>
                 </p>
@@ -176,17 +171,17 @@ export default class App extends Component {
 
             </div>
             <div className="groupTopRight">
-              <Image src={twigPine} className="large" alt="" style={twigPineStyle} flyIn="topRight"></Image>
-              <Image src={twigThuja} className="large" alt="" style={twigThujaStyle} flyIn="right"></Image>
-              <Image src={silverPearl} className="small" alt="" style={silverPearlStyle} flyIn="topRight"></Image>
-              <Image src={silverGlitter} className="small" alt="" style={silverGlitterStyle} flyIn="right"></Image>
+              <Image image={twigPine} className="large" alt="" style={twigPineStyle} flyIn="topRight"></Image>
+              <Image image={twigThuja} className="large" alt="" style={twigThujaStyle} flyIn="right"></Image>
+              <Image image={silverPearl} className="small" alt="" style={silverPearlStyle} flyIn="topRight"></Image>
+              <Image image={silverGlitter} className="small" alt="" style={silverGlitterStyle} flyIn="right"></Image>
             </div>
             <div className="groupBottomLeft">
-              <Image src={decoration2} className="large" alt="" style={decoration2Style} flyIn="bottomLeft"></Image>
-              <Image src={cones2} className="small" alt="" style={cones2Style} flyIn="bottomLeft"></Image>
+              <Image image={decoration2} className="large" alt="" style={decoration2Style} flyIn="bottomLeft"></Image>
+              <Image image={cones2} className="small" alt="" style={cones2Style} flyIn="bottomLeft"></Image>
             </div>
             <div className="groupBottomRight">
-              <Image src={gift2} className="xlarge" alt="" style={gift2Style} flyIn="bottomRight"></Image>
+              <Image image={gift2} className="xlarge" alt="" style={gift2Style} flyIn="bottomRight"></Image>
             </div>
           </div>
 

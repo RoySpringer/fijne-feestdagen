@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { gsap } from "gsap";
 
 export default class Image extends Component {
 
@@ -10,8 +9,9 @@ export default class Image extends Component {
         this.tween = null;
         this.prepareAnimation = 'animate';
         this.animateClass = 'animate';
-        this.handlePageLoad = this.handlePageLoad.bind(this);
+        this.onPageLoad = this.onPageLoad.bind(this);
         this.onComplete = this.onComplete.bind(this);
+        this.onLoad = this.onLoad.bind(this);
         this.styleTo = this.props.style || {};
         this.state = {
             loaded: false,
@@ -20,8 +20,11 @@ export default class Image extends Component {
         }
     }
 
+    /**************************************/
+    /* Component lifecicle methods
+    /**************************************/
     componentDidMount() {
-        window.addEventListener('load', this.handlePageLoad);
+        window.addEventListener('load', this.onPageLoad);
         window.dispatchEvent(new Event('resize'));
     }
 
@@ -37,11 +40,14 @@ export default class Image extends Component {
     }
 
     componentWillUnmount() {
-        window.removeEventListener('load', this.handlePageLoad);
+        window.removeEventListener('load', this.onPageLoad);
         this.element.removeEventListener("transitionend", this.onComplete);
     }
 
-    handlePageLoad() {
+    /**************************************/
+    /* Eventhandlers
+    /**************************************/
+    onPageLoad() {
         this.setState({
             loaded: true,
             className: this.state.className + ' ' + this.prepareAnimation,
@@ -55,7 +61,7 @@ export default class Image extends Component {
         } 
     }
 
-    imageLoaded() {
+    onLoad() {
         let animPropsFrom = {
             ...this.state.style,
         };
@@ -81,13 +87,18 @@ export default class Image extends Component {
         })
     }
 
+    /**************************************/
+    /* Renderer
+    /**************************************/
     render() {
-        let { src, alt } = this.props;
+        let { image, alt } = this.props;
         let attributes = {
-            src, alt
+            src: image.src,
+            srcSet: image.srcSet,
+            alt
         }
         return (
-            <img ref={img => this.element = img} {...attributes} style={this.state.style} className={this.state.className} onLoad={() => this.imageLoaded()}></img>
+            <img ref={img => this.element = img} {...attributes} style={this.state.style} className={this.state.className} onLoad={this.onLoad}></img>
         )
     }
 }

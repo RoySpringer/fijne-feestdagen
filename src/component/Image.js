@@ -15,7 +15,7 @@ export default class Image extends Component {
         this.styleTo = this.props.style || {};
         this.state = {
             loaded: false,
-            className: this.props.className + ' ' + this.prepareAnimation,
+            className: this.props.className,
             style: {...this.props.style, opacity: 0}
         }
     }
@@ -38,16 +38,18 @@ export default class Image extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('load', this.handlePageLoad);
-        this.element.removeEventListener("transitionend", this.onComplete, false);
+        this.element.removeEventListener("transitionend", this.onComplete);
     }
 
     handlePageLoad() {
         this.setState({
-            loaded: true
+            loaded: true,
+            className: this.state.className + ' ' + this.prepareAnimation,
         })
     }
 
     onComplete() {
+        this.element.removeEventListener("transitionend", this.onComplete);
         if (this.props.onComplete) {
             this.props.onComplete();
         } 
@@ -75,7 +77,7 @@ export default class Image extends Component {
         }
 
         this.setState({
-            style: animPropsFrom
+            style: animPropsFrom,
         })
     }
 

@@ -49,7 +49,7 @@ export default class App extends Component {
       wishes: "Fijne Kerstdagen",
       end: "Roy & Priscilla",
       theme: "christmas",
-      loading: true,
+      loader: true,
       textStyle1: {
         zIndex: 1,
         opacity: 0,
@@ -173,7 +173,7 @@ export default class App extends Component {
           <div className="layer-2">
             <div className="App-header">
               <div className="cardContainer">
-                <Loader/>
+                {this.state.loader ? <Loader onComplete={() => this.setState({loader: false})}/> : null}
                 <Image image={require( './img/xmas_assets/hejho_mockup_card2.png')} className="card" alt="" flyIn="top" style={cardStyle} onComplete={this.onCardComplete}></Image>
                 <p ref={p => this.textElementTop = p} className="animate-delay-1" style={this.state.textStyle1}>
                   <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span>

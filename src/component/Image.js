@@ -7,7 +7,6 @@ export default class Image extends Component {
         this.flyIn = this.props.flyIn || '';
         this.element = null;
         this.tween = null;
-        this.prepareAnimation = 'animate';
         this.animateClass = 'animate';
         this.onPageLoad = this.onPageLoad.bind(this);
         this.onAnimationComplete = this.onAnimationComplete.bind(this);
@@ -57,7 +56,7 @@ export default class Image extends Component {
     onPageLoad() {
         this.setState({
             loaded: true,
-            className: this.state.className + ' ' + this.prepareAnimation,
+            className: this.state.className + ' ' + this.animateClass,
         })
     }
 
@@ -65,7 +64,10 @@ export default class Image extends Component {
         this.element.removeEventListener("transitionend", this.onAnimationComplete);
         if (this.props.onComplete) {
             this.props.onComplete();
-        } 
+        }
+        this.setState({
+            className: this.state.className.replace(this.animateClass, '')
+        });
     }
 
     onLoad() {

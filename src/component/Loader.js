@@ -63,6 +63,7 @@ export default class Loader extends Component {
     constructor(props) {
         super(props);
         this.onPageLoad = this.onPageLoad.bind(this);
+        this.onComplete = this.onComplete.bind(this);
         this.state = {
             loading: props.loading || true,
             style: {
@@ -87,12 +88,19 @@ export default class Loader extends Component {
     /**************************************/
     /* Eventhandlers
     /**************************************/
+    onComplete() {
+        this.element.removeEventListener("transitionend", this.onComplete);
+        if(this.props.onComplete) {
+            this.props.onComplete();
+        }
+    }
+
     onPageLoad() {
-        console.log('PageLoad complete');
         this.setState({
             loading: false,
             className: 'animate-out'
         });
+        this.element.addEventListener("transitionend", this.onComplete, false);
     }
 
     /**************************************/

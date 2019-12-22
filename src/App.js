@@ -79,7 +79,6 @@ export default class App extends Component {
   /* Eventhandlers
   /**************************************/
   onCardComplete() {
-    console.log("Card animatin complete");
     let from = {
       opacity: 0,
       y: 100

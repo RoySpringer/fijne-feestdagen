@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Image from './component/Image' 
+import Loader from './component/Loader';
 // import anise from './img/xmas_assets/hejho_mockup_anise.png';
 // import silverPearl from './img/xmas_assets/hejho_mockup_bauble-silver_pearl.png';
 // import silverGlitter from './img/xmas_assets/hejho_mockup_bauble-silver-glitter.png';
@@ -167,10 +168,12 @@ export default class App extends Component {
 
     return (
       <div>
+        
         <div className="App">
           <div className="layer-2">
             <div className="App-header">
               <div className="cardContainer">
+                <Loader/>
                 <Image image={require( './img/xmas_assets/hejho_mockup_card2.png')} className="card" alt="" flyIn="top" style={cardStyle} onComplete={this.onCardComplete}></Image>
                 <p ref={p => this.textElementTop = p} className="animate-delay-1" style={this.state.textStyle1}>
                   <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span>

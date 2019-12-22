@@ -1,0 +1,32 @@
+.loadingText {
+    font-family: 'Dancing Script', cursive;
+    color: #d21c13c5;
+    
+    @for $i from 1 through 3 {
+        span:nth-child(#{$i}) {
+            animation: fade 3s infinite ($i - 1) * 1s;
+        }
+    }
+}
+
+.animate-out {
+    transform: scale(0);
+    opacity: 0;
+}
+
+@keyframes fade{
+    0% {
+        opacity: 1;
+    }
+    33% {
+        opacity: 0;
+    }
+    66% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+

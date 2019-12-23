@@ -168,12 +168,14 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   
   filter: drop-shadow(5px 5px 3px rgba(107, 107, 107, 0.5));
   @media (min-width: 800px) {
-    max-width: 100vw;
+    max-width: 90vw;
+    min-width: 80vw;
     height: auto;
     margin-left: -45px;
   }
   @media (min-width: 1200px) {
     width: auto;
+    min-width: 40vw;
     max-width: 60vw;
     min-height: 70vh;
     margin-left: -80px;

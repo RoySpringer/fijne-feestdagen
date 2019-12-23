@@ -95,9 +95,6 @@ export default class Image extends Component {
             animPropsFrom.transform += " translateX(500px)";
         }
 
-        console.log("Style from: " +
-        animPropsFrom)
-
         this.setState({
             style: animPropsFrom,
         })

@@ -56,7 +56,6 @@ export default class Polaroid extends Component {
     }
 
     onLoad() {
-        console.log(this.styleFrom);
         this.setState({
             style: this.styleFrom,
             imageLoaded: true

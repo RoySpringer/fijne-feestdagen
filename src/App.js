@@ -40,9 +40,7 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
-    this.sources = [];
-    this.imagesToLoad = 0;
-    this.imagesLoaded = 0;
+    this.audioElement = null;
     let rotation = ((Math.random() * 60) - 30);
     this.state = {
       start: "Lieve",
@@ -72,6 +70,7 @@ export default class App extends Component {
     }
 
     this.onCardComplete = this.onCardComplete.bind(this);
+    this.onAudioLoadComplete = this.onAudioLoadComplete.bind(this);
     
     this.textElementTop = null;
     this.textElementMiddel = null;
@@ -92,11 +91,23 @@ export default class App extends Component {
   /**************************************/
   componentDidMount() {
     this.parseNames();
+    this.audioElement.addEventListener('canplaythrough', this.onAudioLoadComplete);
   }
 
   /**************************************/
   /* Eventhandlers
   /**************************************/
+  onAudioLoadComplete() {
+    this.audioElement.removeEventListener('canplaythrough', this.onAudioLoadComplete);
+    document.removeEventListener('click', this.onAudioLoadComplete);
+    this.audioElement.play().catch((error) => {
+      console.log(error);
+      console.log('Adding a onclick listener')
+      document.addEventListener('click', this.onAudioLoadComplete);
+    });
+    this.audioElement.muted = false;
+  }
+
   onCardComplete() {
     let regEx = /[+-]?([0-9]*[.])?[0-9]+(?=deg)/gi;
     let currentDeg = this.state.textStyle1.transform.match(regEx);
@@ -208,8 +219,8 @@ export default class App extends Component {
               <Image image={require('./img/xmas_assets/hejho_mockup_gift2.png')} className="xlarge" alt="" style={gift2Style} flyIn="bottomRight"></Image>
             </div>
           </div>
-
         </div>
+        <audio ref={audio => this.audioElement = audio} src={require('./sounds/We Wish You.mp3')} muted loop autoPlay />
       </div>
     );
   }

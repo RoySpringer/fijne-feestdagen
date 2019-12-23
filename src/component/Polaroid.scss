@@ -1,7 +1,7 @@
 .polaroid {
     position: absolute;
     border-radius: 2px;
-    box-shadow: 1px 5px 5px #ccc;
+    box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.2);
     background-color: #FFF;
 
     .polaroid-image {

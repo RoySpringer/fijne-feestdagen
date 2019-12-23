@@ -67,7 +67,7 @@ export default class Loader extends Component {
         this.state = {
             loading: props.loading || true,
             style: {
-                transition: 'all 500ms'
+                transition: 'all 500ms ease-out 1s'
             },
             className: ''
         }

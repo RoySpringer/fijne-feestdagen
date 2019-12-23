@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 
-export default class Image extends Component {
+export default class AnimatedImage extends Component {
 
     constructor(props) {
         super(props);
-        this.flyIn = this.props.flyIn || '';
         this.element = null;
-        this.tween = null;
-        this.animateClass = 'animate';
         this.onPageLoad = this.onPageLoad.bind(this);
         this.onAnimationComplete = this.onAnimationComplete.bind(this);
         this.onLoad = this.onLoad.bind(this);
-        this.styleTo = {
-            ...this.props.style,
-            opacity: 1
-        };
+        this.styleTo = {...this.props.styleTo};
+        this.styleFrom = {...this.props.styleFrom};
+        if(this.styleFrom.transition) {
+            this.styleTo.transition = this.styleFrom.transition;
+        }
+        if(this.props.flyIn) {
+            this.styleFrom.transform = this.getTransformFromFlyIn(this.props.flyIn);
+        }
         this.state = {
             loaded: false,
-            className: this.props.className,
-            style: {...this.props.style, opacity: 0}
+            imageLoaded: false,
+            style: {...this.styleFrom}
         }
     }
 
@@ -32,15 +33,8 @@ export default class Image extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (prevState.loaded === false && this.state.loaded) {
             this.element.addEventListener("transitionend", this.onAnimationComplete);
-            let style = this.styleTo;
-            if(style.transform.search('translateX') === -1) {
-                style.transform += ' translateX(0)';    
-            }
-            if(style.transform.search('translateY') === -1) {
-                style.transform += ' translateY(0)';
-            }
             this.setState({
-                style: style
+                style: this.styleTo
             });
         }
     }
@@ -56,7 +50,6 @@ export default class Image extends Component {
     onPageLoad() {
         this.setState({
             loaded: true,
-            className: this.state.className + ' ' + this.animateClass,
         })
     }
 
@@ -65,53 +58,53 @@ export default class Image extends Component {
         if (this.props.onComplete) {
             this.props.onComplete();
         }
-        this.setState({
-            className: this.state.className.replace(this.animateClass, '')
-        });
     }
 
     onLoad() {
-        let animPropsFrom = {
-            ...this.state.style,
-        };
+        this.setState({
+            style: this.styleFrom,
+            imageLoaded: true
+        })
+    }
+
+    /**************************************/
+    /* Functions
+    /**************************************/
+    getTransformFromFlyIn(flyIn) {
+        let transform = '';
         let newDeg = Math.random() * 20 + 20;
-        if(animPropsFrom.transform) {
-            let regEx = /[+-]?([0-9]*[.])?[0-9]+(?=deg)/gi;
-            let currentDeg = animPropsFrom.transform.match(regEx);
-            if(currentDeg) {
-                newDeg = parseFloat(currentDeg) + newDeg;
-            }
-        }
-        animPropsFrom.transform = 'rotate(' + newDeg + 'deg)';
-        let searchString = this.flyIn.toLowerCase();
+        transform = 'rotate(' + newDeg + 'deg)';
+        let searchString = flyIn.toLowerCase();
         if (searchString.search('top') !== -1) {
-            animPropsFrom.transform += " translateY(-500px)";
+            transform += " translateY(-250%)";
         } else if (searchString.search('bottom') !== -1) {
-            animPropsFrom.transform += " translateY(500px)";
+            transform += " translateY(250%)";
         }
         if (searchString.search('left') !== -1) {
-            animPropsFrom.transform += " translateX(-500px)";
+            transform += " translateX(-250%)";
         } else if (searchString.search('right') !== -1) {
-            animPropsFrom.transform += " translateX(500px)";
+            transform += " translateX(250%)";
         }
-
-        this.setState({
-            style: animPropsFrom,
-        })
+        return transform;
     }
 
     /**************************************/
     /* Renderer
     /**************************************/
     render() {
-        let { image, alt } = this.props;
+        let { image, id, className } = this.props;
         let attributes = {
+            id,
+            className,
             src: image.src,
-            srcSet: image.srcSet,
-            alt
+            srcSet: image.srcSet
         }
         return (
-            <img ref={img => this.element = img} {...attributes} style={this.state.style} className={this.state.className} onLoad={this.onLoad}></img>
+            <img ref={img => this.element = img}  
+                alt="" 
+                style={this.state.style} 
+                onLoad={this.onLoad} 
+                {...attributes}></img>
         )
     }
 }

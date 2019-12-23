@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.scss';
-import Image from './component/Image' 
 import Loader from './component/Loader';
 import Polaroid from './component/Polaroid';
+import AnimatedImage from './component/AnimatedImage';
 // import anise from './img/xmas_assets/hejho_mockup_anise.png';
 // import silverPearl from './img/xmas_assets/hejho_mockup_bauble-silver_pearl.png';
 // import silverGlitter from './img/xmas_assets/hejho_mockup_bauble-silver-glitter.png';
@@ -71,7 +71,7 @@ export default class App extends Component {
 
     this.onCardComplete = this.onCardComplete.bind(this);
     this.onAudioLoadComplete = this.onAudioLoadComplete.bind(this);
-    
+
     this.textElementTop = null;
     this.textElementMiddel = null;
     this.textElementBottom = null;
@@ -85,7 +85,7 @@ export default class App extends Component {
       name: names
     })
   }
-  
+
   /**************************************/
   /* Component lifecicle methods
   /**************************************/
@@ -162,31 +162,24 @@ export default class App extends Component {
     }
     let cones2Style = {
       bottom: -70,
-      left: window.innerWidth / 3,
+      left: window.innerWidth / 4,
       transform: "rotate(" + ((Math.random() * 10) - 15) + "deg)"
-    }
-
-    let gift2Style = { 
-      bottom: -150,
-      right: -50,
-      transform: "rotate(" + ((Math.random() * 90) - 45) + "deg)" 
-    }
-
-    let cardStyle = {
-      left: '50%',
-      top: '50%',
-      transform: 'translateX(-48%) translateY(-50%)'
     }
 
     return (
       <div>
-        
+
         <div className="App">
           <div className="layer-2">
             <div className="App-header">
               <div className="cardContainer">
-                {this.state.loader ? <Loader onComplete={() => this.setState({loader: false})}/> : null}
-                <Image image={require( './img/xmas_assets/hejho_mockup_card2.png')} className="card" alt="" flyIn="top" style={cardStyle} onComplete={this.onCardComplete}></Image>
+                {this.state.loader ? <Loader onComplete={() => this.setState({ loader: false })} /> : null}
+                <AnimatedImage id="card"
+                  image={require('./img/xmas_assets/hejho_mockup_card2.png')}
+                  flyIn="top"
+                  styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                  styleTo={{ opacity: 1 }}
+                  onComplete={this.onCardComplete} />
                 <p ref={p => this.textElementTop = p} className="animate-delay-1" style={this.state.textStyle1}>
                   <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span>
                 </p>
@@ -194,29 +187,69 @@ export default class App extends Component {
                   <span className={this.state.theme + "-wishes"}>{this.state.wishes}</span><br></br><br></br>
                 </p>
                 <p ref={p => this.textElementBottom = p} className="animate-delay-3" style={this.state.textStyle3}>
-                  <span className={this.state.theme + "-names"}>{this.state.end}</span> 
+                  <span className={this.state.theme + "-names"}>{this.state.end}</span>
                 </p>
               </div>
             </div>
           </div>
           <div className="layer-1">
             <div className="groupTopLeft">
-              <Polaroid image={require('./img/foto-dash.jpg')} 
-                styleFrom={{width: "30vw", height: 'auto', transform: 'translate(-300%, 200%) rotate(80deg) scale(2)'}} 
-                styleTo={{}}/>
+              <AnimatedImage id="giftBox"
+                className="xlarge"
+                image={require('./img/xmas_assets/hejho_mockup_gift2.png')}
+                flyIn="topLeft"
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleTo={{ opacity: 1, transform: "rotate(" + Math.round((Math.random() * 20) - 65) + "deg)" }} />
             </div>
             <div className="groupTopRight">
-              <Image image={require('./img/xmas_assets/hejho_mockup_twig-pine.png')} className="large" alt="" style={twigPineStyle} flyIn="right"></Image>
-              <Image image={require('./img/xmas_assets/hejho_mockup_twig-thuja.png')} className="large" alt="" style={twigThujaStyle} flyIn="right"></Image>
-              <Image image={require('./img/xmas_assets/hejho_mockup_bauble-silver_pearl.png')} className="small" alt="" style={silverPearlStyle} flyIn="topRight"></Image>
-              <Image image={require('./img/xmas_assets/hejho_mockup_bauble-silver-glitter.png')} className="small" alt="" style={silverGlitterStyle} flyIn="right"></Image>
+              <AnimatedImage
+                className="small"
+                image={require('./img/xmas_assets/hejho_mockup_bauble-silver_pearl.png')}
+                flyIn="right"
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleTo={{ ...silverPearlStyle, opacity: 1 }} />
+              <AnimatedImage
+                className="small"
+                image={require('./img/xmas_assets/hejho_mockup_bauble-silver-glitter.png')}
+                flyIn="right"
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleTo={{ ...silverGlitterStyle, opacity: 1 }} />
+              <AnimatedImage
+                className="large"
+                image={require('./img/xmas_assets/hejho_mockup_twig-pine.png')}
+                flyIn="right"
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleTo={{ ...twigPineStyle, opacity: 1 }} />
+              <AnimatedImage
+                className="large"
+                image={require('./img/xmas_assets/hejho_mockup_twig-thuja.png')}
+                flyIn="right"
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleTo={{ ...twigThujaStyle, opacity: 1 }} />
             </div>
             <div className="groupBottomLeft">
-              <Image image={require('./img/xmas_assets/hejho_mockup_decoration2.png')} className="large" alt="" style={decoration2Style} flyIn="bottomLeft"></Image>
-              <Image image={require('./img/xmas_assets/hejho_mockup_cones2.png')} className="small" alt="" style={cones2Style} flyIn="bottomLeft"></Image>
+              <AnimatedImage
+                className="large"
+                image={require('./img/xmas_assets/hejho_mockup_decoration2.png')}
+                flyIn="bottomLeft"
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleTo={{ ...decoration2Style, opacity: 1 }} />
+              <AnimatedImage
+                className="small"
+                image={require('./img/xmas_assets/hejho_mockup_cones2.png')}
+                flyIn="bottomLeft"
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleTo={{ ...cones2Style, opacity: 1 }} />
             </div>
             <div className="groupBottomRight">
-              <Image image={require('./img/xmas_assets/hejho_mockup_gift2.png')} className="xlarge" alt="" style={gift2Style} flyIn="bottomRight"></Image>
+              <Polaroid id="photoRoy"
+                image={require('./img/foto-roy-en-pris.jpg')}
+                styleFrom={{ width: "30vw", height: 'auto', transform: 'translate(-300%, 200%) rotate(80deg) scale(2)' }}
+              />
+              <Polaroid id="photoDash"
+                image={require('./img/foto-dash.jpg')}
+                styleFrom={{ width: "30vw", height: 'auto', transform: 'translate(-300%, 200%) rotate(90deg) scale(2)' }}
+              />
             </div>
           </div>
         </div>

@@ -94,20 +94,24 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   img {
     top: 0;
     left: 0;
+    filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3))
   }
 
-  .polaroid {
-    width: 40vw;
-    height: auto;
-    transform: translate(0px, 0px) rotate(40deg) scale(1);
-    transition: all 3s cubic-bezier(0.22, 0.33, 0, 1.06) 2s;
+  #giftBox {
+    top: -7vh;
+    left: -10vw;
+    height: 45vh;
+    width: auto;
     @media (min-width: 800px) {
-      width: 30vw;
+      left: -10vw; 
+      height: 60vh;
     }
     @media (min-width: 1200px) {
-      width: 20vw;
+      height: 65vh;
+      left: 0vw;
     }
   }
+
 }
 .groupTopRight {
   position: absolute;
@@ -117,7 +121,7 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   img {
     top: 0;
     right: 0;
-    filter: drop-shadow(-8px 36px 7px rgba(107, 107, 107, 0.5))
+    filter: drop-shadow(-8px 36px 7px rgba(0, 0, 0, 0.3))
   }
 }
 .groupBottomLeft {
@@ -127,7 +131,7 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   img {
     bottom: 0;
     left: 0;
-    filter: drop-shadow(2px 2px 3px rgba(107, 107, 107, 0.5));
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3));
   }
 }
 .groupBottomRight {
@@ -137,7 +141,48 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   img {
     bottom: 0;
     right: 0;
-    filter: drop-shadow(-2px 2px 3px rgba(107, 107, 107, 0.5));
+    filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.3));
+  }
+
+  .polaroid {
+    width: 40vw;
+    height: auto;
+    
+    @media (min-width: 800px) {
+      width: 30vw;
+    }
+    @media (min-width: 1200px) {
+      width: 20vw;
+    }
+  }
+
+  #photoRoy {
+    top: 9vh;
+    right: 10vh;
+    transition: all 3s cubic-bezier(0.22, 0.33, 0, 1.06) 3s;
+    transform: translate(0px, 0px) rotate(18deg) scale(1);
+    @media (min-width: 800px) {
+
+    }
+    @media (min-width: 1200px) {
+      top: -5vh;
+      right: 17vh;
+    }
+  }
+
+  #photoDash {
+    transition: all 3s cubic-bezier(0.22, 0.33, 0, 1.06) 5s;
+    right: -3vw;
+    top: 20vh;
+    transform: translate(0px, 0px) rotate(37deg) scale(1);
+    z-index: 10;
+    @media (min-width: 800px) {
+      
+    }
+    @media (min-width: 1200px) {
+      top: 9vh;
+      transform: translate(0px, 0px) rotate(28deg) scale(1);
+    }
   }
 }
 
@@ -160,13 +205,16 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   font-family: 'Indie Flower', cursive;
 }
 
-.card {
+#card {
   position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-48%) translateY(-50%);
   min-width: 110vw;
   max-width: 110vw;
   margin-left: -20px;
   
-  filter: drop-shadow(5px 5px 3px rgba(107, 107, 107, 0.5));
+  filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.3));
   @media (min-width: 800px) {
     max-width: 90vw;
     min-width: 80vw;
@@ -190,3 +238,4 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 .animate {
   transition: all 4s;
 }
+

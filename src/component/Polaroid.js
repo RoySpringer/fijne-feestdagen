@@ -66,13 +66,13 @@ export default class Polaroid extends Component {
     /* Renderer
     /**************************************/
     render() {
-        let { image } = this.props;
+        let { image, id } = this.props;
         let attributes = {
             src: image.src,
             srcSet: image.srcSet
         }
         return (
-            <div className='polaroid' style={this.state.style} ref={img => this.element = img}>
+            <div id={id} className='polaroid' style={this.state.style} ref={img => this.element = img}>
                 <img className="polaroid-image" {...attributes} alt="" onLoad={this.onLoad}></img>
             </div>
         )

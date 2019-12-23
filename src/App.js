@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.scss';
 import Image from './component/Image' 
 import Loader from './component/Loader';
+import Polaroid from './component/Polaroid';
 // import anise from './img/xmas_assets/hejho_mockup_anise.png';
 // import silverPearl from './img/xmas_assets/hejho_mockup_bauble-silver_pearl.png';
 // import silverGlitter from './img/xmas_assets/hejho_mockup_bauble-silver-glitter.png';
@@ -189,7 +190,9 @@ export default class App extends Component {
           </div>
           <div className="layer-1">
             <div className="groupTopLeft">
-
+              <Polaroid image={require('./img/foto-dash.jpg')} 
+                styleFrom={{width: "30vw", height: 'auto', transform: 'translate(-300%, 200%) rotate(80deg) scale(2)'}} 
+                styleTo={{}}/>
             </div>
             <div className="groupTopRight">
               <Image image={require('./img/xmas_assets/hejho_mockup_twig-pine.png')} className="large" alt="" style={twigPineStyle} flyIn="right"></Image>

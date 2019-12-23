@@ -1,0 +1,18 @@
+.polaroid {
+    position: absolute;
+    border-radius: 2px;
+    box-shadow: 1px 5px 5px #ccc;
+    background-color: #FFF;
+
+    .polaroid-image {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: auto;
+        padding-top: 5%;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-bottom: 20%;
+        filter: none;
+    }
+}

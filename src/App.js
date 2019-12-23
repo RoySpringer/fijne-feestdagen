@@ -83,9 +83,14 @@ export default class App extends Component {
     let url = new URL(window.location.href);
     let urlNames = url.pathname.substring(1, url.pathname.length);
     let names = decodeURI(urlNames);
-    this.setState({
+    let state = {
       name: names
-    })
+    };
+    if(names === "Priscilla*") {
+      state.name = "Priscilla";
+      state.end = "x Roy & Dash"; 
+    }
+    this.setState(state)
   }
 
   /**************************************/

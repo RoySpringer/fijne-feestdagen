@@ -48,9 +48,9 @@ const LoaderWrapper = styled.span`
     }
 
     svg {
-        height: 25%;
+        height: 60%;
         overflow: visible;
-        width: 25%;
+        width: 60%;
         display: block;
         top: 50%;
         margin: auto; 
@@ -64,12 +64,14 @@ export default class Loader extends Component {
         super(props);
         this.onPageLoad = this.onPageLoad.bind(this);
         this.onComplete = this.onComplete.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.state = {
             loading: props.loading || true,
             style: {
                 transition: 'all 500ms ease-out 1s'
             },
-            className: ''
+            className: '',
+            loadingText: 'Het pakketje voorbereiden'
         }
         this.element = null;
     }
@@ -98,21 +100,32 @@ export default class Loader extends Component {
     onPageLoad() {
         this.setState({
             loading: false,
-            className: 'animate-out'
+            loadingText: 'Click op het pakketje om hem te openen'
         });
-        this.element.addEventListener("transitionend", this.onComplete, false);
+    }
+
+    onClick() {
+        if(this.state.loading === false) {
+            this.setState({
+                className: 'animate-out'
+            });
+            this.element.addEventListener("transitionend", this.onComplete, false);
+        }
     }
 
     /**************************************/
     /* Renderer
     /**************************************/
     render() {
-
+        
         return (
-            <div style={this.state.style} className={this.state.className} ref={wrapper => this.element = wrapper}>
-                <LoaderWrapper >
+            <div id='loader' style={this.state.style} className={this.state.className} ref={wrapper => this.element = wrapper}>
+                <LoaderWrapper onClick={this.onClick}>
                     <Giftbox/>
-                    <p className={"loadingText"} >Het pakketje voorbereiden<span>.</span><span>.</span><span>.</span></p>
+                    {this.state.loading ? 
+                    <p className="loadingText" >{this.state.loadingText}<span>.</span><span>.</span><span>.</span></p> :
+                    <p className={"loadingText loadComplete"} >{this.state.loadingText}</p>}
+                    
                 </LoaderWrapper>
             </div>
         )

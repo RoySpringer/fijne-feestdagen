@@ -49,6 +49,7 @@ export default class App extends Component {
       end: "Roy & Priscilla",
       theme: "christmas",
       loader: true,
+      opened: false,
       textStyle1: {
         zIndex: 1,
         opacity: 0,
@@ -71,6 +72,7 @@ export default class App extends Component {
 
     this.onCardComplete = this.onCardComplete.bind(this);
     this.onAudioLoadComplete = this.onAudioLoadComplete.bind(this);
+    this.onLoadComplete = this.onLoadComplete.bind(this);
 
     this.textElementTop = null;
     this.textElementMiddel = null;
@@ -131,6 +133,13 @@ export default class App extends Component {
     });
   }
 
+  onLoadComplete() {
+    this.setState({ 
+      loader: false,
+      opened: true
+    });
+  }
+
   /**************************************/
   /* Renderer
   /**************************************/
@@ -173,13 +182,13 @@ export default class App extends Component {
           <div className="layer-2">
             <div className="App-header">
               <div className="cardContainer">
-                {this.state.loader ? <Loader onComplete={() => this.setState({ loader: false })} /> : null}
                 <AnimatedImage id="card"
                   image={require('./img/xmas_assets/hejho_mockup_card2.png')}
                   flyIn="top"
                   styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
                   styleTo={{ opacity: 1 }}
-                  onComplete={this.onCardComplete} />
+                  onComplete={this.onCardComplete} 
+                  start={this.state.opened}/>
                 <p ref={p => this.textElementTop = p} className="animate-delay-1" style={this.state.textStyle1}>
                   <span className={this.state.theme + "-between"}>{this.state.name !== "" && this.state.start + " " + this.state.name + ","}</span>
                 </p>
@@ -198,6 +207,7 @@ export default class App extends Component {
                 className="xlarge"
                 image={require('./img/xmas_assets/hejho_mockup_gift2.png')}
                 flyIn="topLeft"
+                start={this.state.opened}
                 styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
                 styleTo={{ opacity: 1, transform: "rotate(" + Math.round((Math.random() * 20) - 65) + "deg)" }} />
             </div>
@@ -206,24 +216,28 @@ export default class App extends Component {
                 className="small"
                 image={require('./img/xmas_assets/hejho_mockup_bauble-silver_pearl.png')}
                 flyIn="right"
+                start={this.state.opened}
                 styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
                 styleTo={{ ...silverPearlStyle, opacity: 1 }} />
               <AnimatedImage
                 className="small"
                 image={require('./img/xmas_assets/hejho_mockup_bauble-silver-glitter.png')}
                 flyIn="right"
+                start={this.state.opened}
                 styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
                 styleTo={{ ...silverGlitterStyle, opacity: 1 }} />
               <AnimatedImage
                 className="large"
                 image={require('./img/xmas_assets/hejho_mockup_twig-pine.png')}
                 flyIn="right"
+                start={this.state.opened}
                 styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
                 styleTo={{ ...twigPineStyle, opacity: 1 }} />
               <AnimatedImage
                 className="large"
                 image={require('./img/xmas_assets/hejho_mockup_twig-thuja.png')}
                 flyIn="right"
+                start={this.state.opened}
                 styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
                 styleTo={{ ...twigThujaStyle, opacity: 1 }} />
             </div>
@@ -232,28 +246,33 @@ export default class App extends Component {
                 className="large"
                 image={require('./img/xmas_assets/hejho_mockup_decoration2.png')}
                 flyIn="bottomLeft"
+                start={this.state.opened}
                 styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
                 styleTo={{ ...decoration2Style, opacity: 1 }} />
               <AnimatedImage
                 className="small"
                 image={require('./img/xmas_assets/hejho_mockup_cones2.png')}
                 flyIn="bottomLeft"
+                start={this.state.opened}
                 styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
                 styleTo={{ ...cones2Style, opacity: 1 }} />
             </div>
             <div className="groupBottomRight">
               <Polaroid id="photoRoy"
                 image={require('./img/foto-roy-en-pris.jpg')}
-                styleFrom={{ width: "30vw", height: 'auto', transform: 'translate(-300%, 200%) rotate(80deg) scale(2)' }}
+                styleFrom={{ width: "30vw", height: 'auto', transform: 'translate(-300%, 300%) rotate(80deg) scale(2)' }}
+                start={this.state.opened}
               />
               <Polaroid id="photoDash"
                 image={require('./img/foto-dash.jpg')}
-                styleFrom={{ width: "30vw", height: 'auto', transform: 'translate(-300%, 200%) rotate(90deg) scale(2)' }}
+                styleFrom={{ width: "30vw", height: 'auto', transform: 'translate(-300%, 300%) rotate(90deg) scale(2)' }}
+                start={this.state.opened}
               />
             </div>
           </div>
         </div>
         <audio ref={audio => this.audioElement = audio} src={require('./sounds/We Wish You.mp3')} muted loop autoPlay />
+        {this.state.loader ? <Loader onComplete={this.onLoadComplete} /> : null}
       </div>
     );
   }

@@ -14,6 +14,7 @@ export default class Polaroid extends Component {
         this.state = {
             loaded: false,
             imageLoaded: false,
+            useStartProp: this.props.start !== undefined,
             style: {...this.props.styleFrom}
         }
     }
@@ -26,7 +27,14 @@ export default class Polaroid extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.loaded === false && this.state.loaded) {
+        if(this.state.useStartProp) {
+            if(prevProps.start === false && this.props.start === true) {
+                this.element.addEventListener("transitionend", this.onAnimationComplete);
+                this.setState({
+                    style: this.styleTo
+                });
+            }
+        } else if (prevState.loaded === false && this.state.loaded) {
             this.element.addEventListener("transitionend", this.onAnimationComplete);
             this.setState({
                 style: this.styleTo

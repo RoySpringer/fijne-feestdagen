@@ -141,6 +141,14 @@ export default class App extends Component {
   }
 
   /**************************************/
+  /* Functions
+  /**************************************/
+  getRandomDelay() {
+    return Math.round((Math.random() * 2000) + 1500);
+  }
+
+
+  /**************************************/
   /* Renderer
   /**************************************/
   render() {
@@ -185,7 +193,7 @@ export default class App extends Component {
                 <AnimatedImage id="card"
                   image={require('./img/xmas_assets/hejho_mockup_card2.png')}
                   flyIn="top"
-                  styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                  styleFrom={{ opacity: 0, transition: 'all 2s ease ' + (this.getRandomDelay() + 4000) + 'ms' }}
                   styleTo={{ opacity: 1 }}
                   onComplete={this.onCardComplete} 
                   start={this.state.opened}/>
@@ -208,7 +216,7 @@ export default class App extends Component {
                 image={require('./img/xmas_assets/hejho_mockup_gift2.png')}
                 flyIn="topLeft"
                 start={this.state.opened}
-                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleFrom={{ opacity: 0, transition: 'all 1s ease ' + this.getRandomDelay() + 'ms' }}
                 styleTo={{ opacity: 1, transform: "rotate(" + Math.round((Math.random() * 20) - 65) + "deg)" }} />
             </div>
             <div className="groupTopRight">
@@ -217,28 +225,28 @@ export default class App extends Component {
                 image={require('./img/xmas_assets/hejho_mockup_bauble-silver_pearl.png')}
                 flyIn="right"
                 start={this.state.opened}
-                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleFrom={{ opacity: 0, transition: 'all 1s ease ' + (this.getRandomDelay() + 1000) + 'ms' }}
                 styleTo={{ ...silverPearlStyle, opacity: 1 }} />
               <AnimatedImage
                 className="small"
                 image={require('./img/xmas_assets/hejho_mockup_bauble-silver-glitter.png')}
                 flyIn="right"
                 start={this.state.opened}
-                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + (this.getRandomDelay() + 500) +'ms' }}
                 styleTo={{ ...silverGlitterStyle, opacity: 1 }} />
               <AnimatedImage
                 className="large"
                 image={require('./img/xmas_assets/hejho_mockup_twig-pine.png')}
                 flyIn="right"
                 start={this.state.opened}
-                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + this.getRandomDelay() + 'ms' }}
                 styleTo={{ ...twigPineStyle, opacity: 1 }} />
               <AnimatedImage
                 className="large"
                 image={require('./img/xmas_assets/hejho_mockup_twig-thuja.png')}
                 flyIn="right"
                 start={this.state.opened}
-                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + this.getRandomDelay() + 'ms' }}
                 styleTo={{ ...twigThujaStyle, opacity: 1 }} />
             </div>
             <div className="groupBottomLeft">
@@ -247,14 +255,14 @@ export default class App extends Component {
                 image={require('./img/xmas_assets/hejho_mockup_decoration2.png')}
                 flyIn="bottomLeft"
                 start={this.state.opened}
-                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleFrom={{ opacity: 0, transition: 'all 1s ease ' + this.getRandomDelay() + 'ms' }}
                 styleTo={{ ...decoration2Style, opacity: 1 }} />
               <AnimatedImage
                 className="small"
                 image={require('./img/xmas_assets/hejho_mockup_cones2.png')}
                 flyIn="bottomLeft"
                 start={this.state.opened}
-                styleFrom={{ opacity: 0, transition: 'all 2s ease ' + Math.round((Math.random() * 2000) + 1500) + 'ms' }}
+                styleFrom={{ opacity: 0, transition: 'all 1s ease ' + this.getRandomDelay() + 'ms' }}
                 styleTo={{ ...cones2Style, opacity: 1 }} />
             </div>
             <div className="groupBottomRight">

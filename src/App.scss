@@ -159,7 +159,7 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   #photoRoy {
     top: 9vh;
     right: 10vh;
-    transition: all 3s cubic-bezier(0.22, 0.33, 0, 1.06) 3s;
+    transition: all 3s cubic-bezier(0.22, 0.33, 0, 1.06) 5s;
     transform: translate(0px, 0px) rotate(18deg) scale(1);
     @media (min-width: 800px) {
 
@@ -171,7 +171,7 @@ $webgradient-4: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   }
 
   #photoDash {
-    transition: all 3s cubic-bezier(0.22, 0.33, 0, 1.06) 5s;
+    transition: all 3s cubic-bezier(0.22, 0.33, 0, 1.06) 8s;
     right: -3vw;
     top: 20vh;
     transform: translate(0px, 0px) rotate(37deg) scale(1);
